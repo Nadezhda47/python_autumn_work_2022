@@ -38,7 +38,7 @@ def decorator_second(func):
         logging.basicConfig(
             filename = "debug.log",
             level=logging.DEBUG,
-            format='%(message)s, %(app_name)s, %(asctime)s ',
+            format='%(message)s, %(asctime)s ',
             filemode='w',
         )
         logging.debug(f'show, {count2}')
