@@ -15,7 +15,7 @@ count = 0
 count2 = 0
 def decorator_first(func):
     global count
-    count += 1
+
     def wrapper(mass):
         global count
         count += 1
@@ -23,7 +23,7 @@ def decorator_first(func):
             filename = "debug.log",
             level=logging.DEBUG,
             format='%(message)s, %(asctime)s ',
-            filemode='w',
+            filemode='at',
         )
         logging.debug(f'render, {count}')
         func(mass)
@@ -31,7 +31,7 @@ def decorator_first(func):
 
 def decorator_second(func):
     global count2
-    count2 += 1
+
     def wrapper2(mass):
         global count2
         count2 += 1
@@ -39,7 +39,7 @@ def decorator_second(func):
             filename = "debug.log",
             level=logging.DEBUG,
             format='%(message)s, %(asctime)s ',
-            filemode='w',
+            filemode='at',
         )
         logging.debug(f'show, {count2}')
         func(mass)
@@ -56,3 +56,9 @@ wrap_func(mass)
 
 wrap_func2 = decorator_second(show)
 wrap_func2(mass)
+
+wrap_func = decorator_first(render)
+wrap_func(mass)
+
+wrap_func = decorator_first(render)
+wrap_func(mass)
