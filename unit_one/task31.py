@@ -8,24 +8,42 @@
 #Декоратор должен применяться для различных функций с переменным числом аргументов.
 #Статистику вызовов необходимо записывать в файл при каждом запуске скрипта.
 
-import datetime, logging
-
+import logging
 
 mass = range(111111)
 count = 0
+count2 = 0
 def decorator_first(func):
+    global count
+    count += 1
     def wrapper(mass):
         global count
         count += 1
-        func(mass)
         logging.basicConfig(
             filename = "debug.log",
             level=logging.DEBUG,
-            format='%(asctime)s : %(levelname)s : %(message)s',
+            format='%(message)s, %(asctime)s ',
             filemode='w',
         )
+        logging.debug(f'render, {count}')
+        func(mass)
     return wrapper
 
+def decorator_second(func):
+    global count2
+    count2 += 1
+    def wrapper2(mass):
+        global count2
+        count2 += 1
+        logging.basicConfig(
+            filename = "debug.log",
+            level=logging.DEBUG,
+            format='%(message)s, %(app_name)s, %(asctime)s ',
+            filemode='w',
+        )
+        logging.debug(f'show, {count2}')
+        func(mass)
+    return wrapper2
 def render(mass):
     a = sorted(mass)
     return a
@@ -36,3 +54,5 @@ def show (mass):
 wrap_func = decorator_first(render)
 wrap_func(mass)
 
+wrap_func2 = decorator_second(show)
+wrap_func2(mass)
