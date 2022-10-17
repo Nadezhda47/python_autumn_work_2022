@@ -41,7 +41,7 @@ def decorator_second(func):
             format='%(message)s, %(asctime)s ',
             filemode='at',
         )
-        logging.debug(f'show, {count2}')
+        logging.debug(f'{func.__name__}, {count2}')
         func(mass)
     return wrapper2
 def render(mass):
