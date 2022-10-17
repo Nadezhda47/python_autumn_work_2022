@@ -25,7 +25,7 @@ def decorator_first(func):
             format='%(message)s, %(asctime)s ',
             filemode='at',
         )
-        logging.debug(f'render, {count}')
+        logging.debug(f'{func.__name__} {count}')
         func(mass)
     return wrapper
 
